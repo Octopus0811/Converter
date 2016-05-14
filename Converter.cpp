@@ -12,32 +12,73 @@ void ToInt          (int Array[], int* Num, int System, int NumSize);
 
 int main()
     {
-    int NumSize = 5;
-    int Arrayay[1024] = {5, 10, 15, 0, 12};
+
+    //{============================================================================
+    /*
+
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, // A,  B,  C,  D,  E,  F ]       SPECIAL:[L, I, P, T, (FOR), Ч]
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, // 10, 11, 12, 13, 14, 15]               [1, 1, 5, 7, 4,     4]
+
+    1. DED                  {13, 14, 13}
+    2. DEAD                 {13, 14, 10, 13}
+    3. ACE                  {10, 12, 14}
+    4. CAFE                 {12, 10, 15, 14}
+    5. BAD                  {11, 10, 13}
+    6. 5AFOC                {5, 10, 15, 0, 12}
+    7. COFFEE               {12, 0, 15, 15, 14, 14}
+    8. 4T                   {4, 7}
+    9. BE4                  {11, 14, 4}
+    10.LE4T                 {1, 14, 4, 7}
+    11.LEFT                 {1, 14, 15, 7}
+    12.DEADPOOL             {13, 14, 10, 13, 5, 0, 0, 1}
+    13.PLOT                 {5, 1, 0, 7}
+    14.PLATE                {5, 1, 10, 7, 14}
+    15.TOOL                 {7, 0, 0, 1}
+    16.PO4TA                {5, 0, 4, 7, 10}
+    17.FEEL                 {15, 14, 14, 1}
+    18.POLET                {5, 0, 1, 14, 7}
+    19.PECTOLET             {5, 14, 12, 7, 0, 1, 14, 7}
+    20.LED                  {1, 14, 13}
+    21.LEDOCOL              {1, 14, 13, 12, 0, 1}
+    22.DEEP                 {13, 14, 14, 5}
+    23.4EL                  {4, 14, 1}
+    24.COLT                 {12, 0, 1, 7}
+    25.4EP4EL               {4, 14, 5, 4, 14, 1}
+    26.PABOTA               {5, 10, 11, 0, 7, 10}
+    27.TORT                 {7, 0, 5, 7}
+    28.LETO                 {1, 14, 7, 0}
+    29.TELO                 {7, 14, 1, 0}
+    30.LOAD                 {1, 0, 10, 13}
+    31.FEED                 {15, 14, 14, 13}
+
+    */
+    //}============================================================================
+
+    int NumSize = 6;
+    int Array[1024] = {12, 0, 15, 15, 14, 14};
     int Num = 0;
 
-    Print(Arrayay, NumSize);
+    Print(Array, NumSize);
 
-    ToInt(Arrayay, &Num, 16, NumSize);
-
-    printf("%d\n", Num);
-
-    FromInt(Arrayay, Num, 2, &NumSize);
-
-    Print(Arrayay, NumSize);
-
-    Inverse(Arrayay, NumSize);
-
-    Print(Arrayay, NumSize);
-
-    ToInt(Arrayay, &Num, 2, NumSize);
+    ToInt(Array, &Num, 16, NumSize);
 
     printf("%d\n", Num);
 
-    FromInt(Arrayay, Num, 16, &NumSize);
+    FromInt(Array, Num, 2, &NumSize);
 
-    Print(Arrayay, NumSize);
+    Print(Array, NumSize);
 
+    Inverse(Array, NumSize);
+
+    Print(Array, NumSize);
+
+    ToInt(Array, &Num, 2, NumSize);
+
+    printf("%d\n", Num);
+
+    FromInt(Array, Num, 16, &NumSize);
+
+    Print(Array, NumSize);
 
     return 0;
     }
@@ -51,9 +92,7 @@ void FromInt(int Array[], int Num, int System, int* NumSize)
     while (Num > 0)
         {
         Array[Size] = Num%System;
-
         Num = Num/System;
-
         Size++;
 
         }
@@ -94,29 +133,29 @@ void Print(int Array[], int Size)
 
     while (i < Size)
         {
-        switch(Array[i])
-            {
-            default: printf("%d", Array[i]);
-                break;
-
-            case 10: printf("A");
-                break;
-
-            case 11: printf("B");
-                break;
-
-            case 12: printf("C");
-                break;
-
-            case 13: printf("D");
-                break;
-
-            case 14: printf("E");
-                break;
-
-            case 15: printf("F");
-                break;
-            }
+        switch(Array[i])                                 //
+            {                                            //
+            default: printf("%d", Array[i]);             //
+                break;                                   //
+                                                         //
+            case 10: printf("A");                        //
+                break;                                   //
+                                                         //
+            case 11: printf("B");                        //
+                break;                                   //
+                                                         //
+            case 12: printf("C");                        //     FIX ME (IT IS NOT THE BEST VARIANT)
+                break;                                   //
+                                                         //
+            case 13: printf("D");                        //
+                break;                                   //
+                                                         //
+            case 14: printf("E");                        //
+                break;                                   //
+                                                         //
+            case 15: printf("F");                        //
+                break;                                   //
+            }                                            //
         i++;
         }
     printf("\n");
@@ -147,8 +186,8 @@ void ToInt(int Array[], int* Num, int System, int NumSize)
 
     while (i < NumSize )
         {
-        *Num = *Num + Array[i]*pow(System, NumSize - i - 1 );
+        *Num = *Num * System + Array[i];
         i++;
         }
-
     }
+
